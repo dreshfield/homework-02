@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Book.destroy_all
+
+50.times do
+  Book.create!(title: Faker::Book.unique.title,
+               author: Faker::Book.unique.author,
+               genre: Faker::Book.genre,
+               classification: Classifications['classifications'].to_a.sample,
+               type: %w[Fiction Nonfiction].sample,
+               year: rand(1900..2017))
+end
+
+puts "Created #{Book.count} books"
