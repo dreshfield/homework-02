@@ -13,7 +13,7 @@ Book.destroy_all
                author: Faker::Book.unique.author,
                genre: Faker::Book.genre,
                classification: Classifications['classifications'].to_a.sample,
-               type: %w[Fiction Nonfiction].sample,
+               btype: %w[Fiction Nonfiction].sample,
                year: rand(1900..2017))
 end
 
