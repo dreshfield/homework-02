@@ -6,15 +6,29 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Author.destroy_all
+Authorship.destroy_all
 Book.destroy_all
+
+25.times do
+  Author.create!(first_name: Faker::Name.first_name,
+                 last_name: Faker::Name.last_name,
+                 age: rand(15..100))
+end
 
 50.times do
   Book.create!(title: Faker::Book.unique.title,
-               author: Faker::Book.unique.author,
                genre: Faker::Book.genre,
-               classification: Classifications['classifications'].to_a.sample,
+               classification: Classification.all.sample,
                btype: %w[Fiction Nonfiction].sample,
                year: rand(1900..2017))
+end
+
+author_ids = Author.pluck(:id)
+books = Book.all 
+
+books.each do | book |
+  Authorship.create!(book_id: book.id, author_id: author_ids.sample)
 end
 
 puts "Created #{Book.count} books"

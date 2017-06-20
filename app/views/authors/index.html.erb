@@ -1,0 +1,10 @@
+<div class="col-10 offset-1">
+  <h1 class="header">Authors</h1>
+  <div class="clear"></div>
+  <br />
+  <% @authors.each do |author| %>
+    <ul>
+      <li><b><%= link_to author.full_name, '' %></b>, <%= author.age %></li>
+    </ul>
+  <% end %>
+</div>

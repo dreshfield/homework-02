@@ -1,10 +1,21 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
-<% @books.each do | book | %>
-  <%= book.title %>
-  <%= book.author %>
-  <%= book.genre %>
-  <%= book.classification %>
-  <%= book.btype %>
-  <%= book.year %>
-<% end %>
+<div class="col-10 offset-1">
+  <h1 class="header"><%= link_to 'Books', root_path, class: 'header' %></h1>
+  <div class="float-right">
+    <%= form_tag(books_index_path, method: "get", id: "search-form", enforce_utf8: false) do %>
+      <%= text_field_tag :query, params[:query], id: "search-input" %>
+      <%= submit_tag 'Search', name: nil, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+  <br />
+  <% @books.each do | book | %>
+    <ul>
+      <!-- TODO: Reimplement author display here -->
+      <!-- TODO: Add -->
+      <li><b><%= link_to book.title, '' %></b>, <%= book.classification %>, <%= book.btype %>, <%= book.genre %> (<%= book.year %>)</li>
+     </ul>
+  <% end %>
+  <% if @books.blank? %>
+    <h4>There are no results containing the term "<%= params[:query] %>".</h4>
+  <% end %>
+</div>
